@@ -1,5 +1,5 @@
 import { fetchCountry } from '@/services/clientApi';
-import { CountryDetails } from '@/pages/CountryDetails';
+import CountryDetails from '@/pages/CountryDetails';
 
 const CountryDetailsPage = async ({ params }: { params: { slug: string } }) => {
   const { slug } = params;

@@ -4,7 +4,7 @@ import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
 import Image from 'next/image';
 import { Country } from '@/types';
 
-export const CountryDetails = ({ country }: { country: Country | string }) => {
+const CountryDetails = ({ country }: { country: Country | string }) => {
   if (typeof country === 'string') {
     return (
       <Container
@@ -17,12 +17,12 @@ export const CountryDetails = ({ country }: { country: Country | string }) => {
   }
 
   const countryDetails = [
-    { label: 'Столица', value: country.capital?.[0] || 'Нет данных' },
-    { label: 'Регион', value: country.region || 'Нет данных' },
-    { label: 'Подрегион', value: country.subregion || 'Нет данных' },
+    { label: 'Столица', value: country?.capital?.[0] || 'Нет данных' },
+    { label: 'Регион', value: country?.region || 'Нет данных' },
+    { label: 'Подрегион', value: country?.subregion || 'Нет данных' },
     {
       label: 'Население',
-      value: country.population.toLocaleString() || 'Нет данных',
+      value: country?.population.toLocaleString() || 'Нет данных',
     },
   ];
 
@@ -36,22 +36,24 @@ export const CountryDetails = ({ country }: { country: Country | string }) => {
           <Col>
             <Card className="flex-row  shadow">
               <Image
-                src={country.flags.svg}
-                alt={`Флаг ${country.name.common}`}
-                className="m-3 rounded border"
+                src={country.flags.svg || ''}
+                alt={`Флаг ${country?.name.common || ''}`}
+                className="m-3 rounded border object-fit-cover"
                 width={250}
                 height={250}
               />
               <Card.Body>
                 <Card.Title className="pb-3">
-                  <strong>{country.name.common}</strong>
+                  <strong>{country?.name?.common || 'Нет данных'}</strong>
                 </Card.Title>
 
-                {countryDetails.map(({ label, value }, index) => (
-                  <Card.Text key={index}>
-                    <strong>{label}:</strong> {value}
-                  </Card.Text>
-                ))}
+                {countryDetails &&
+                  countryDetails.length > 0 &&
+                  countryDetails.map(({ label, value }, index) => (
+                    <Card.Text key={index}>
+                      <strong>{label}:</strong> {value}
+                    </Card.Text>
+                  ))}
               </Card.Body>
             </Card>
           </Col>
@@ -60,3 +62,5 @@ export const CountryDetails = ({ country }: { country: Country | string }) => {
     </Container>
   );
 };
+
+export default CountryDetails;

@@ -41,10 +41,11 @@ const Countries = ({ countries }: { countries: Country[] | string }) => {
   return (
     <Container>
       <Row>
-        {countries.length > 0 &&
+        {countries &&
+          countries.length > 0 &&
           countries.slice(0, visibleCount).map((country, index) => (
             <>
-              <Col key={country.cca3} xs={12} md={6} lg={4} className="mb-4">
+              <Col key={index} xs={12} md={6} lg={4} className="mb-4">
                 <Card className="shadow">
                   <Card.Body>
                     <Card.Title>{country.name.common}</Card.Title>
