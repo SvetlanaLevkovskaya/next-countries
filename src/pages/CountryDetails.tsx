@@ -22,7 +22,7 @@ const CountryDetails = ({ country }: { country: Country | string }) => {
     { label: 'Subregion', value: country?.subregion || 'No data' },
     {
       label: 'Population',
-      value: country?.population.toLocaleString() || 'No data',
+      value: String(country?.population)?.toLocaleString() || 'No data',
     },
   ];
 

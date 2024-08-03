@@ -1,13 +1,13 @@
 export interface Country {
   flags: {
-    svg: string;
+    svg: string | null;
   };
   name: {
-    common: string;
+    common: string | null;
   };
-  capital?: string[];
-  region: string;
-  subregion: string;
-  population: number;
-  cca3: string;
+  capital?: string[] | null;
+  region: string | null;
+  subregion: string | null;
+  population: number | null;
+  cca3: string | null;
 }
