@@ -10,4 +10,5 @@ export interface Country {
   subregion: string | null;
   population: number | null;
   cca3: string | null;
+  latlng?: [number, number] | null;
 }

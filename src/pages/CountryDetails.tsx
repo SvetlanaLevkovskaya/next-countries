@@ -3,8 +3,15 @@
 import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
 import Image from 'next/image';
 import { Country } from '@/types';
+import { MapComponent } from '@/components/Map';
 
 const CountryDetails = ({ country }: { country: Country | string }) => {
+  const defaultMapCenter = { lat: 53, lng: 28 };
+  const mapCenter =
+    typeof country !== 'string' && country?.latlng?.length === 2
+      ? { lat: country.latlng[0], lng: country.latlng[1] }
+      : defaultMapCenter;
+
   if (typeof country === 'string') {
     return (
       <Container
@@ -28,11 +35,10 @@ const CountryDetails = ({ country }: { country: Country | string }) => {
     },
   ];
 
+  console.log(mapCenter);
+
   return (
-    <Container
-      className="d-flex align-items-center justify-content-center"
-      style={{ minHeight: '100vh' }}
-    >
+    <Container className="d-flex flex-column align-items-center justify-content-center gap-4 min-vh-100">
       {country && (
         <Row className="justify-content-center ">
           <Col>
@@ -43,24 +49,24 @@ const CountryDetails = ({ country }: { country: Country | string }) => {
                 className="m-3 rounded border object-fit-cover mx-auto"
                 width={250}
                 height={250}
+                priority
               />
               <Card.Body>
                 <Card.Title className="pb-3">
                   <strong>{country?.name?.common || 'No data'}</strong>
                 </Card.Title>
 
-                {countryDetails &&
-                  countryDetails.length > 0 &&
-                  countryDetails.map(({ label, value }) => (
-                    <Card.Text key={label}>
-                      <strong>{label}:</strong> {value}
-                    </Card.Text>
-                  ))}
+                {countryDetails.map(({ label, value }) => (
+                  <Card.Text key={label}>
+                    <strong>{label}:</strong> {value}
+                  </Card.Text>
+                ))}
               </Card.Body>
             </Card>
           </Col>
         </Row>
       )}
+      <MapComponent mapCenter={mapCenter} />
     </Container>
   );
 };
