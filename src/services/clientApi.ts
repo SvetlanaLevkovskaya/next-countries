@@ -7,7 +7,7 @@ export async function fetchCountries(): Promise<Country[] | string> {
     return response.data;
   } catch (error) {
     console.error('Error fetching countries:', error);
-    return 'Не удалось загрузить список стран. Попробуйте позже.';
+    return 'Failed to load the list of countries. Please try again later.';
   }
 }
 
@@ -19,10 +19,10 @@ export async function fetchCountry(slug: string): Promise<Country | string> {
     if (response.data && response.data.length > 0) {
       return response.data[0];
     } else {
-      return 'Страна не найдена. Попробуйте другой запрос.';
+      return 'Country not found. Please try a different query.';
     }
   } catch (error) {
     console.error(`Error fetching country with slug ${slug}:`, error);
-    return 'Не удалось загрузить данные о стране. Попробуйте позже.';
+    return 'Failed to load country data. Please try again later.';
   }
 }
