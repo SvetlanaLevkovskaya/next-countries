@@ -13,7 +13,7 @@ const Countries = ({ countries }: { countries: Country[] | string }) => {
 
   const { ref: inViewRef } = useInView({
     threshold: 0,
-    delay: 1000,
+    delay: 300,
     onChange: (inView) => {
       if (inView) {
         loadMore();
@@ -43,36 +43,31 @@ const Countries = ({ countries }: { countries: Country[] | string }) => {
       <Row>
         {countries &&
           countries.length > 0 &&
-          countries.slice(0, visibleCount).map((country, index) => (
-            <>
-              <Col key={index} xs={12} md={6} lg={4} className="mb-4">
-                <Card className="shadow">
-                  <Card.Body>
-                    <Card.Title>{country.name.common}</Card.Title>
-                    <Link
-                      href={`/${country.name.common}`}
-                      className="btn btn-warning btn-sm"
-                    >
-                      Подробнее
-                    </Link>
-                  </Card.Body>
-                </Card>
-              </Col>
-              {index === visibleCount - 1 && (
-                <div
-                  ref={setRefs}
-                  className="d-flex justify-content-center mt-4"
-                >
-                  <Spinner
-                    animation="border"
-                    color="gray"
-                    variant="secondary"
-                  />
-                </div>
-              )}
-            </>
+          countries.slice(0, visibleCount).map((country) => (
+            <Col key={country.cca3} xs={12} md={6} lg={4} className="mb-4">
+              <Card className="shadow">
+                <Card.Body>
+                  <Card.Title>{country?.name.common}</Card.Title>
+                  <Link
+                    href={`/${country?.name.common}`}
+                    className="btn btn-warning btn-sm"
+                  >
+                    Details
+                  </Link>
+                </Card.Body>
+              </Card>
+            </Col>
           ))}
       </Row>
+      {visibleCount < countries?.length && (
+        <Row className="justify-content-center mt-4">
+          <Col xs="auto">
+            <div ref={setRefs}>
+              <Spinner animation="border" variant="secondary" />
+            </div>
+          </Col>
+        </Row>
+      )}
     </Container>
   );
 };

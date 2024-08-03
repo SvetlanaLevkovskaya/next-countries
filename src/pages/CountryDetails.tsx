@@ -17,12 +17,12 @@ const CountryDetails = ({ country }: { country: Country | string }) => {
   }
 
   const countryDetails = [
-    { label: 'Столица', value: country?.capital?.[0] || 'Нет данных' },
-    { label: 'Регион', value: country?.region || 'Нет данных' },
-    { label: 'Подрегион', value: country?.subregion || 'Нет данных' },
+    { label: 'Capital', value: country?.capital?.[0] || 'No data' },
+    { label: 'Region', value: country?.region || 'No data' },
+    { label: 'Subregion', value: country?.subregion || 'No data' },
     {
-      label: 'Население',
-      value: country?.population.toLocaleString() || 'Нет данных',
+      label: 'Population',
+      value: country?.population.toLocaleString() || 'No data',
     },
   ];
 
@@ -34,23 +34,23 @@ const CountryDetails = ({ country }: { country: Country | string }) => {
       {country && (
         <Row className="justify-content-center ">
           <Col>
-            <Card className="flex-row  shadow">
+            <Card className="flex-column shadow flex-md-row">
               <Image
-                src={country.flags.svg || ''}
-                alt={`Флаг ${country?.name.common || ''}`}
+                src={country.flags.svg || 'No data'}
+                alt={`Флаг ${country?.name?.common || 'No data'}`}
                 className="m-3 rounded border object-fit-cover"
                 width={250}
                 height={250}
               />
               <Card.Body>
                 <Card.Title className="pb-3">
-                  <strong>{country?.name?.common || 'Нет данных'}</strong>
+                  <strong>{country?.name?.common || 'No data'}</strong>
                 </Card.Title>
 
                 {countryDetails &&
                   countryDetails.length > 0 &&
-                  countryDetails.map(({ label, value }, index) => (
-                    <Card.Text key={index}>
+                  countryDetails.map(({ label, value }) => (
+                    <Card.Text key={label}>
                       <strong>{label}:</strong> {value}
                     </Card.Text>
                   ))}
