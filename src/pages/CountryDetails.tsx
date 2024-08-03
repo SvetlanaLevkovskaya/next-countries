@@ -36,11 +36,11 @@ const CountryDetails = ({ country }: { country: Country | string }) => {
       {country && (
         <Row className="justify-content-center ">
           <Col>
-            <Card className="flex-column shadow flex-md-row">
+            <Card className="flex-column shadow flex-md-row px-3">
               <Image
                 src={country.flags.svg || 'No data'}
                 alt={`Флаг ${country?.name?.common || 'No data'}`}
-                className="m-3 rounded border object-fit-cover"
+                className="m-3 rounded border object-fit-cover mx-auto"
                 width={250}
                 height={250}
               />
