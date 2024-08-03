@@ -32,7 +32,7 @@ const Countries = ({ countries }: { countries: Country[] | string }) => {
 
   if (typeof countries === 'string') {
     return (
-      <Container className="d-flex align-items-center justify-content-center">
+      <Container className="d-flex align-items-center justify-content-center py-5">
         <Alert variant="danger">{countries}</Alert>
       </Container>
     );
@@ -60,7 +60,7 @@ const Countries = ({ countries }: { countries: Country[] | string }) => {
           ))}
       </Row>
       {visibleCount < countries?.length && (
-        <Row className="justify-content-center mt-4">
+        <Row className="justify-content-center mt-4 overflow-hidden">
           <Col xs="auto">
             <div ref={setRefs}>
               <Spinner animation="border" variant="secondary" />
