@@ -9,7 +9,7 @@ import { useInView } from 'react-intersection-observer';
 const Countries = ({ countries }: { countries: Country[] | string }) => {
   const ref = useRef<HTMLDivElement | null>(null);
 
-  const [visibleCount, setVisibleCount] = useState(21);
+  const [visibleCount, setVisibleCount] = useState(30);
 
   const { ref: inViewRef } = useInView({
     threshold: 0,
@@ -32,25 +32,25 @@ const Countries = ({ countries }: { countries: Country[] | string }) => {
 
   if (typeof countries === 'string') {
     return (
-      <Container className="d-flex align-items-center justify-content-center py-5">
+      <Container className="d-flex align-items-center justify-content-center">
         <Alert variant="danger">{countries}</Alert>
       </Container>
     );
   }
 
   return (
-    <Container>
+    <Container className="py-5">
       <Row>
         {countries &&
           countries.length > 0 &&
           countries.slice(0, visibleCount).map((country) => (
             <Col key={country.cca3} xs={12} md={6} lg={4} className="mb-4">
-              <Card className="shadow">
-                <Card.Body>
+              <Card className="shadow h-100">
+                <Card.Body className="d-flex align-items-center justify-content-between ">
                   <Card.Title>{country?.name.common}</Card.Title>
                   <Link
                     href={`/${country?.name.common}`}
-                    className="btn btn-warning btn-sm"
+                    className="btn btn-warning btn-sm text-white mt-auto"
                   >
                     Details
                   </Link>
